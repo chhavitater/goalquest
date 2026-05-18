@@ -1,5 +1,19 @@
 // index.js – GoalQuest API server
 require("dotenv").config();
+// Auto-migrate and seed on first deploy
+async function initDb() {
+  try {
+    const pool = require("./db/pool");
+    await pool.query(`CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY)`);
+    const { rows } = await pool.query(`SELECT COUNT(*) FROM users`);
+    if (parseInt(rows[0].count) === 0) {
+      console.log("Running first-time setup...");
+      require("./db/migrate-runner");
+    }
+  } catch(e) {
+    console.error("Init check failed:", e.message);
+  }
+}
 const express = require("express");
 const cors = require("cors");
 
