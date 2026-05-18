@@ -8,12 +8,12 @@
 ```
 ┌──────────────────────────────────────────────────────┐
 │                     BROWSER                          │
-│  React 18 + Vite  (port 5173)                        │
+│  React 18 + Vite  (Vercel Deployment)                        │
 │  src/App.jsx  ←→  src/api.js  (fetch wrapper)        │
 └─────────────────────┬────────────────────────────────┘
                       │ REST JSON  /api/*
 ┌─────────────────────▼────────────────────────────────┐
-│              Node.js / Express  (port 4000)          │
+│              Node.js / Express  (Render Web Service)          │
 │  routes/auth.js        – login, JWT                  │
 │  routes/goals.js       – CRUD, approve, shared push  │
 │  routes/achievements.js – quarterly check-in data    │
@@ -25,7 +25,7 @@
 └─────────────────────┬────────────────────────────────┘
                       │ pg (node-postgres)
 ┌─────────────────────▼────────────────────────────────┐
-│              PostgreSQL  (port 5432)                 │
+│              PostgreSQL  (Managed Database)                 │
 │  users · cycles · goals · achievements               │
 │  checkin_comments · audit_log                        │
 └──────────────────────────────────────────────────────┘
