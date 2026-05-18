@@ -49,4 +49,18 @@ app.use((err, _req, res, _next) => {
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀 GoalQuest API running on http://localhost:${PORT}`));
+
+async function startServer() {
+  try {
+    await initDb();
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 GoalQuest API running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Server startup failed:", err);
+    process.exit(1);
+  }
+}
+
+startServer();
